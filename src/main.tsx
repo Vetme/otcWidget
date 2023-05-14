@@ -57,7 +57,7 @@ const App = () => {
         JSON.stringify(connectedWalletsLabelArray)
       );
   }, [connectedWallets, wallet]);
-
+  // change
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
