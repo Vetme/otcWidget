@@ -1,7 +1,7 @@
 import { Contract, ContractInterface } from "ethers";
 import { useMemo } from "react";
 import { CONTRACT_ADDRESS, MULTICALL_ADDRESS } from "../constants";
-import escrowOtcApi from "../constants/abis/escrowOtcApi.json";
+import escrowOtcAbi from "../constants/abis/escrowOtcAbi.json";
 import { multicallABI } from "../constants/multicall";
 import { isAddress } from "../utils";
 import { useActiveWeb3 } from "./useWeb3Provider";
@@ -35,6 +35,6 @@ export const useMulticalContract = () => {
 
 export const useMatchContract = () => {
   const { chainId } = useActiveWeb3();
-  const contract = useContract(CONTRACT_ADDRESS[chainId], escrowOtcApi);
+  const contract = useContract(CONTRACT_ADDRESS[chainId], escrowOtcAbi);
   return contract;
 };

@@ -53,12 +53,17 @@ const SwapWidget = ({ client }: { client?: string }) => {
     }
   };
 
+  const handleClose = () => {
+    setShowModal(null);
+    setQuery("");
+  };
+
   const modalContent = (() => {
     switch (showModal) {
       case ModalType.TOKEN_SWAP:
         return (
           <TokenSwap
-            close={() => setShowModal(null)}
+            close={() => handleClose()}
             trade={selectedTrade}
             client={client}
           />

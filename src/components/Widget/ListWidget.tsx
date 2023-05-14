@@ -138,14 +138,15 @@ const ListWidget = ({ client }: { client?: string }) => {
       deadline: form.deadline,
       nonce: form.nonce,
     };
+
     try {
-      await sign(signatureData, CONTRACT_ADDRESS[chainId]);
+      const sig = await sign(signatureData, CONTRACT_ADDRESS[chainId]);
 
       const data = {
         ...form,
         chain: chainId,
         nonce: form.nonce,
-        signature,
+        signature: sig,
         receiving_wallet: account,
         token_in: get?.address,
         token_out: give?.address,
@@ -179,8 +180,8 @@ const ListWidget = ({ client }: { client?: string }) => {
         setGive(undefined);
         setGet(undefined);
       }
-    } catch {
-      alert("Opps, something went wrong");
+    } catch (err: any) {
+      alert(err.reason || err.message);
       setLoading(false);
     }
   };

@@ -2,6 +2,7 @@ import { parseUnits } from "ethers/lib/utils";
 import { useMatchContract } from "./useContract";
 import { useActiveWeb3 } from "./useWeb3Provider";
 import { useCallback, useState } from "react";
+import { Contract, providers } from "ethers";
 
 export const useOrder = () => {
   const { chainId, account, provider } = useActiveWeb3();
@@ -18,11 +19,11 @@ export const useOrder = () => {
           amountOut: parseUnits(
             value.amount_out.toString(),
             value.token_out_metadata.decimal_place
-          ),
+          ).toString(),
           amountIn: parseUnits(
             value.amount_in.toString(),
             value.token_in_metadata.decimal_place
-          ),
+          ).toString(),
           deadline: value.deadline,
           nonce: value.nonce,
         };
@@ -35,11 +36,11 @@ export const useOrder = () => {
           amountOut: parseUnits(
             value.aIn.toString(),
             value.token_in_metadata.decimal_place
-          ),
+          ).toString(),
           amountIn: parseUnits(
             value.aOut.toString(),
             value.token_out_metadata.decimal_place
-          ),
+          ).toString(),
           deadline: value.deadline,
           nonce: value.nonce_friction,
         };
@@ -47,19 +48,20 @@ export const useOrder = () => {
         const buy = generateOrder(signature, buyerValue);
         const sell = generateOrder(value.signature, sellerValue);
 
-        console.log(buy);
-        console.log(sell);
+        const p = provider as providers.Web3Provider;
 
-        const signer = contract?.connect(provider.getSigner());
+        const signer = contract?.connect(p.getSigner()) as Contract;
+
+        console.log(buy, sell);
 
         const trxn = await signer.matchSupportFraction(
           sell.order,
           sell.signature,
           buy.order,
-          buy.signature,
-          {
-            gasLimit: 20000000,
-          }
+          buy.signature
+          // {
+          //   gasLimit: 20000000,
+          // }
         );
         const transaction = await trxn.wait();
         return Promise.resolve(transaction);

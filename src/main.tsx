@@ -16,13 +16,13 @@ init({
       id: "0x1",
       token: "ETH",
       label: "Ethereum Mainnet",
-      rpcUrl: "https://ethereum.kyberengineering.io",
+      rpcUrl: "https://rpc.ankr.com/eth",
     },
     {
       id: "0x89",
       token: "MATIC",
       label: "Polygon",
-      rpcUrl: "https://polygon.kyberengineering.io",
+      rpcUrl: "https://rpc.ankr.com/polygon",
     },
   ],
 });

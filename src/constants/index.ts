@@ -83,14 +83,14 @@ export const CONTRACT_ADDRESS: { [chainId: number]: string } = {
   1: "0x2e6013DA3CbE83781A03Aa2cFEeEb0179f610C3F",
   137: "0x54b681922d7696763197147546EbA21a13B3BEBE",
   56: "0x54b681922d7696763197147546EbA21a13B3BEBE",
-  5: "0x40d5E4520aCb3733D765e974316C777A1c5C270E",
+  5: "0x956663BE8EeBCd23bf9c091B41719597BAb6f550",
 };
 
 export const SCAN_LINK: { [chainId: number]: string } = {
   1: "https://etherscan.io",
   137: "https://polygonscan.com",
   56: "https://bscscan.com",
-  5: "https://rpc.ankr.com/eth_goerli",
+  5: "https://goerli.etherscan.io",
 };
 
 export const SUPPORTED_NETWORKS = Object.keys(SCAN_LINK);

@@ -31,6 +31,7 @@ export const useSignature = () => {
       const signature = await signer?._signTypedData(domain, types, value);
 
       setSignature(signature);
+      return signature;
     },
     [chainId]
   );

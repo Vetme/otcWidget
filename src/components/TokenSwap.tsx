@@ -88,10 +88,10 @@ const Msg = styled.div`
 interface TokenSwapI {
   trade: any;
   client?: string;
-  close:()=>void
+  close: () => void;
 }
 
-const TokenSwap = ({ trade, client,close }: TokenSwapI) => {
+const TokenSwap = ({ trade, client, close }: TokenSwapI) => {
   const { chainId, account } = useActiveWeb3();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -153,11 +153,11 @@ const TokenSwap = ({ trade, client,close }: TokenSwapI) => {
       amountOut: parseUnits(
         aIn.toString(),
         trade?.token_in_metadata.decimal_place
-      ),
+      ).toString(),
       amountIn: parseUnits(
         aOut.toString(),
         trade?.token_out_metadata.decimal_place
-      ),
+      ).toString(),
       deadline: trade?.deadline,
       nonce: trade?.nonce_friction,
     };
@@ -167,12 +167,13 @@ const TokenSwap = ({ trade, client,close }: TokenSwapI) => {
 
     try {
       setLoading(true);
-      await sign(signatureData, CONTRACT_ADDRESS[chainId]);
-      const response = await match(listingCopy, signature);
+      const sig = await sign(signatureData, CONTRACT_ADDRESS[chainId]);
+
+      const response = await match(listingCopy, sig);
       setLoading(false);
 
       const data = {
-        buyerSignature: signature,
+        buyerSignature: sig,
         sellerSignature: trade?.signature,
         id: trade?._id,
         account,
@@ -181,7 +182,6 @@ const TokenSwap = ({ trade, client,close }: TokenSwapI) => {
         client: client,
       };
 
-      
       const result = await fetch(`${BASE_URL}/lists/completed/${data.id}`, {
         method: "PATCH",
         headers: {
@@ -193,12 +193,12 @@ const TokenSwap = ({ trade, client,close }: TokenSwapI) => {
 
       if (result.status === 200) {
         setSuccess("List Created");
-        close()
+        close();
       }
 
       // console.log(response);
-    } catch (err) {
-      console.log("error", err);
+    } catch (err: any) {
+      alert(err.reason || err.message);
       setLoading(false);
     }
   };
