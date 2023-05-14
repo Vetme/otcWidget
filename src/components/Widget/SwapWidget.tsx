@@ -23,8 +23,6 @@ const SwapWidget = ({ client }: { client?: string }) => {
   const [showModal, setShowModal] = useState<ModalType | null>(null);
   const [selectedTrade, setTrade] = useState<IList | undefined>(undefined);
 
-  // const { chainId, account } = useActiveWeb3();
-
   function handleSearch(e: ChangeEvent<HTMLInputElement>): void {
     setQuery(e.target.value);
   }
