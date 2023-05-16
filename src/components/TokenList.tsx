@@ -73,7 +73,7 @@ const TokenList = ({ token, balance, callback, isImported }: IToken) => {
   };
 
   return (
-    <Wrapper onClick={() => (isImported ? false : callback())}>
+    <Wrapper onClick={() => callback()}>
       <Container align="center">
         <Avatar>
           {logoURI ? (
@@ -99,7 +99,12 @@ const TokenList = ({ token, balance, callback, isImported }: IToken) => {
         </Details>
       </Container>
       {isImported ? (
-        <Button onClick={() => (isImport ? handleRemove() : handleImport())}>
+        <Button
+          onClick={(e: any) => {
+            e.stopPropagation();
+            isImport ? handleRemove() : handleImport();
+          }}
+        >
           {isImport ? "Remove" : "Import"}
         </Button>
       ) : (

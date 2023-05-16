@@ -1,10 +1,11 @@
-import ReactDOM from "react-dom/client";
+// import ReactDOM from "react-dom/client";
 import Widget from "./components/Widget";
 
 import { init, useWallets, useConnectWallet } from "@web3-onboard/react";
 import injectedModule from "@web3-onboard/injected-wallets";
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { render } from "react-dom";
 
 const injected = injectedModule();
 
@@ -112,6 +113,14 @@ const App = () => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <App />
+// ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+//   <App />
+// );
+
+const root = document.getElementById("root"); // <- This is the correct method call for React version 17
+render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  root
 );

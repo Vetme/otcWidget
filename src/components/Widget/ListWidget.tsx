@@ -41,8 +41,6 @@ import { computeUsdPrice, getTokenPrice } from "../../utils";
 import useTheme from "../../hooks/useTheme";
 
 const initialState = {
-  token_in: "",
-  token_out: "0x63bEf5e5bd830F61aD5C19fD8Db80462D44ea323",
   amount_in: "",
   amount_out: "",
   is_friction: false,
@@ -122,7 +120,7 @@ const ListWidget = ({ client }: { client?: string }) => {
     approvalState,
   } = useApproval(
     (form?.amount_out as unknown as string) || "0",
-    form.token_out,
+    give?.address as string,
     CONTRACT_ADDRESS[chainId]
   );
 
