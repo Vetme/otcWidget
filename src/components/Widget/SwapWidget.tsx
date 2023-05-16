@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from "react";
-import TokenSelect, { InputWrapper, ResultCon } from "../TokenSelect";
+import { useState, ChangeEvent, useEffect } from "react";
+import { InputWrapper, ResultCon } from "../TokenSelect";
 import { ChevronLeft, LSearch } from "../icons";
 import {
   Back,
@@ -14,11 +14,16 @@ import {
 } from "../styles";
 import { useTokenFetch } from "../../hooks/useTokens";
 import ListCard from "../ListCard";
-import { IList, ModalType, TokenI, TradeType } from "../../types";
-import { useActiveWeb3 } from "../../hooks/useWeb3Provider";
+import { IList, ModalType, TradeType } from "../../types";
 import TokenSwap from "../TokenSwap";
 
-const SwapWidget = ({ client }: { client?: string }) => {
+const SwapWidget = ({
+  client,
+  defaultTokenName,
+}: {
+  client?: string;
+  defaultTokenName?: string;
+}) => {
   const { loading, data, setQuery, query } = useTokenFetch();
   const [showModal, setShowModal] = useState<ModalType | null>(null);
   const [selectedTrade, setTrade] = useState<IList | undefined>(undefined);
@@ -40,9 +45,11 @@ const SwapWidget = ({ client }: { client?: string }) => {
     }
   })();
 
-  const handleSelected = (t: any) => {
-    console.log(t);
-  };
+  useEffect(() => {
+    if (defaultTokenName) {
+      setQuery(defaultTokenName as string);
+    }
+  }, [defaultTokenName]);
 
   const handleTrade = (type: TradeType, list: IList) => {
     if (type == TradeType.Swap) {

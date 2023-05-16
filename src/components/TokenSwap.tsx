@@ -8,19 +8,11 @@ import {
   Spacer,
   Text,
   Input,
+  Message,
+  MTitle,
 } from "./styles";
-import { LSearch } from "./icons";
-import { useTokens } from "../hooks/useTokens";
-import TokenList from "./TokenList";
-import {
-  BASE_URL,
-  CONTRACT_ADDRESS,
-  NATIVE_TOKEN,
-  SUPPORTED_NETWORKS,
-  TokenInfo,
-} from "../constants";
-import { isAddress } from "../utils";
-import { useToken } from "../hooks/useToken";
+import { Check } from "./icons";
+import { BASE_URL, CONTRACT_ADDRESS, SUPPORTED_NETWORKS } from "../constants";
 import TokenBadge from "./TokenBadge";
 import { Button } from "./Button";
 import { useActiveWeb3 } from "../hooks/useWeb3Provider";
@@ -28,7 +20,6 @@ import { useSignature } from "../hooks/useSignature";
 import useApproval, { APPROVAL_STATE } from "../hooks/useApproval";
 import { useOrder } from "../hooks/useOrder";
 import { parseUnits } from "ethers/lib/utils";
-import { IList } from "../types";
 
 const SwapContainer = styled.div`
   max-width: 100%;
@@ -81,10 +72,6 @@ const ADown = styled.div`
   place-content: center;
 `;
 
-const Msg = styled.div`
-  padding: 10px;
-`;
-
 interface TokenSwapI {
   trade: any;
   client?: string;
@@ -94,11 +81,11 @@ interface TokenSwapI {
 const TokenSwap = ({ trade, client, close }: TokenSwapI) => {
   const { chainId, account } = useActiveWeb3();
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
+  const [error] = useState<boolean>(false);
   const isUnsupported = !SUPPORTED_NETWORKS.includes(chainId.toString());
   const { match } = useOrder();
   const [success, setSuccess] = useState<string>("");
-  const { sign, signature } = useSignature();
+  const { sign } = useSignature();
   const [form, setForm] = useState({
     amount_in: trade?.amount_out_balance,
     amount_out:
@@ -182,7 +169,7 @@ const TokenSwap = ({ trade, client, close }: TokenSwapI) => {
         client: client,
       };
 
-      const result = await fetch(`${BASE_URL}/lists/completed/${data.id}`, {
+      await fetch(`${BASE_URL}/lists/completed/${data.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -191,19 +178,15 @@ const TokenSwap = ({ trade, client, close }: TokenSwapI) => {
       });
       setLoading(false);
 
-      if (result.status === 200) {
-        setSuccess("List Created");
-        close();
-      }
-
-      // console.log(response);
+      // if (result.status === 200) {
+      setSuccess("Swap Completed");
+      close();
+      // }
     } catch (err: any) {
       alert(err.reason || err.message);
       setLoading(false);
     }
   };
-
-  // const tokenAddress = tokens.map((item) => item.address);
 
   return (
     <SwapContainer onClick={(e) => e.stopPropagation()}>
@@ -335,6 +318,16 @@ const TokenSwap = ({ trade, client, close }: TokenSwapI) => {
           </Button>
         </InputWrapper>
       </Body>
+
+      {!!success && (
+        <Message className={success ? "show" : "hide"}>
+          <Flex direction="column" align="center" justify="center">
+            <Check />
+            <MTitle>{success}</MTitle>
+            <Button onClick={() => setSuccess("")}>Ok</Button>
+          </Flex>
+        </Message>
+      )}
     </SwapContainer>
   );
 };

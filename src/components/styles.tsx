@@ -150,6 +150,7 @@ export const Input = styled.input`
 
   &.disabled {
     pointer-events: none;
+    background: ${({ theme }) => theme.secondary};
   }
 
   @media (max-width: 640px) {
@@ -370,7 +371,59 @@ export const Message = styled.div`
   background: ${({ theme }) => `${theme.dialog}`};
   display: flex;
   justify-content: center;
+  transition: 0.4s;
+  /* opacity: 0; */
+
+  &.show {
+    animation: 0.4s slideUp alternate;
+  }
+
+  &.hide {
+    animation: 0.4s slideDown forwards;
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translate(-50%, -50%);
+      top: 60%;
+      opacity: 0;
+    }
+    100% {
+      top: 50%;
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @keyframes slideDown {
+    0% {
+      transform: translate(-50%, -50%);
+      top: 50%;
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+      transform: translate(-50%, 0%);
+    }
+  }
 `;
 export const MTitle = styled.h2`
   font-size: 18px;
+`;
+
+export const PoweredBy = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 12px;
+
+  svg {
+    height: 27px;
+    width: 92px;
+  }
 `;

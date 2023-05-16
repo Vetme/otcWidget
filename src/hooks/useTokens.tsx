@@ -108,7 +108,7 @@ export const useImportedTokens = () => {
 
 export const useTokenFetch = () => {
   const [loading, setStatus] = useState(false);
-  const [query, setQuery] = useState("cool");
+  const [query, setQuery] = useState<string>("");
   const [data, setData] = useState<any[]>([]);
   const { chainId } = useActiveWeb3();
 
@@ -122,7 +122,8 @@ export const useTokenFetch = () => {
           });
         })
         .catch((error: any) => {
-          alert();
+          console.log(error);
+          // alert();
         })
         .finally(() => {
           setStatus(false);

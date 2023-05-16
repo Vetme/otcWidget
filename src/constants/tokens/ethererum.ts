@@ -1,19 +1,11 @@
 const ethereumTokens = [
-  {
+     {
     chainId: 1,
-    address: '0xdeFA4e8a7bcBA345F687a2f1456F5Edd9CE97202',
-    symbol: 'KNC',
-    name: 'Kyber Network Crystal',
-    decimals: 18,
-    logoURI: 'https://raw.githubusercontent.com/KyberNetwork/dmm-interface/main/src/assets/images/KNC.svg',
-  },
-  {
-    chainId: 1,
-    address: '0xdd974D5C2e2928deA5F71b9825b8b646686BD200',
-    symbol: 'KNCL',
-    name: 'Kyber Network Crystal Legacy',
-    decimals: 18,
-    logoURI: 'https://raw.githubusercontent.com/KyberNetwork/ks-assets/main/img/token/KNCL.png',
+    address: "0xe7ef051c6ea1026a70967e8f04da143c67fa4e1f",
+    symbol: "VetMe",
+    name: "VetMe",
+    decimals: 9,
+    logoURI: "https://otc.vetmeblock.com/images/coins/vetme.webp",
   },
   {
     chainId: 1,
@@ -439,6 +431,22 @@ const ethereumTokens = [
     name: 'Keep Network',
     decimals: 18,
     logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/5566.png',
+  },
+  {
+    chainId: 1,
+    address: '0xdeFA4e8a7bcBA345F687a2f1456F5Edd9CE97202',
+    symbol: 'KNC',
+    name: 'Kyber Network Crystal',
+    decimals: 18,
+    logoURI: 'https://raw.githubusercontent.com/KyberNetwork/dmm-interface/main/src/assets/images/KNC.svg',
+  },
+  {
+    chainId: 1,
+    address: '0xdd974D5C2e2928deA5F71b9825b8b646686BD200',
+    symbol: 'KNCL',
+    name: 'Kyber Network Crystal Legacy',
+    decimals: 18,
+    logoURI: 'https://raw.githubusercontent.com/KyberNetwork/ks-assets/main/img/token/KNCL.png',
   },
   {
     chainId: 1,

@@ -83,7 +83,7 @@ export const InputWrapper = styled.div`
   }
 
   input {
-    height: 45px;
+    /* height: 45px; */
     outline: none;
     border: none;
     font-size: 18px;
@@ -126,7 +126,7 @@ const ImportToken = ({
 
 const TokenSelect = ({ handleSelected, chainId }: TokenSelect) => {
   const [query, setQuery] = useState<string>("");
-  const [active, setActive] = useState<"coin" | "nft">("coin");
+  const [active] = useState<"coin" | "nft">("coin");
   const [activeTab, setActiveTab] = useState<"all" | "imported">("all");
   const tokens = useTokens();
   // const tokenAddress = tokens.map((item) => item.address);

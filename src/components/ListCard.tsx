@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Spacer, Text } from "./styles";
 import styled, { css } from "styled-components";
 import { Button } from "./Button";
@@ -81,7 +80,7 @@ const List = ({
 }) => {
   const theme = useTheme();
   const handleChart = (token: any) => {
-    // alert();
+    console.log(token);
   };
   return (
     <SwapContainer className="guest">

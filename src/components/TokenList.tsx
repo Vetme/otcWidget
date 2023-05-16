@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Text } from "./styles";
 import styled from "styled-components";
 import { TokenInfo } from "../constants";

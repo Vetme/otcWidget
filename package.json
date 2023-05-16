@@ -1,7 +1,7 @@
 {
-  "name": "@vetMe/widgets",
+  "name": "@vetme/widgets",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "ethers": "5.7.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^16.8.0 || 17.x",
+    "react-dom": "^16.8.0 || 17.x",
     "react-popper": "^2.3.0",
     "styled-components": "^5.3.10"
   },
@@ -29,10 +29,23 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "typescript": "^5.0.2",
-    "vite": "^4.3.2"
+    "vite": "^4.3.2",
+    "vite-plugin-dts": "^2.3.0"
   },
   "peerDependencies": {
     "react": "^16.8.0 || 17.x",
     "react-dom": "^16.8.0 || 17.x"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/widget.umd.js",
+  "module": "./dist/widget.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/widget.es.js",
+      "require": "./dist/widget.umd.js"
+    }
   }
 }

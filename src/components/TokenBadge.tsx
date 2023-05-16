@@ -29,13 +29,13 @@ const ImgWrap = styled.div`
   }
 `;
 
-interface BadgeI {
-  token: any;
-  icon?: string;
-  hasCaret?: boolean;
-  hasChart?: boolean;
-  handleClick: () => void;
-}
+// interface BadgeI {
+//   token: any;
+//   icon?: string;
+//   hasCaret?: boolean;
+//   hasChart?: boolean;
+//   handleClick: () => void;
+// }
 
 const TokenBadge = ({ token, handleClick }: any) => {
   const theme = useTheme();

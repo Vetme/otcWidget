@@ -1,7 +1,7 @@
 import { parseUnits } from "ethers/lib/utils";
 import { useMatchContract } from "./useContract";
 import { useActiveWeb3 } from "./useWeb3Provider";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Contract, providers } from "ethers";
 
 export const useOrder = () => {

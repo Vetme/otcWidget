@@ -59,11 +59,11 @@ const ListWidget = ({ client }: { client?: string }) => {
   const [get, setGet] = useState<TokenI | undefined>(undefined);
   const [hasDeadline, setHasDeadline] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
+  const [error] = useState<boolean>(false);
   const [action, setAction] = useState<"giving" | "getting">("giving");
   const { chainId, account } = useActiveWeb3();
   const isUnsupported = !SUPPORTED_NETWORKS.includes(chainId.toString());
-  const { sign, signature } = useSignature();
+  const { sign } = useSignature();
   const theme = useTheme();
 
   const handleDChange = () => {
@@ -277,6 +277,8 @@ const ListWidget = ({ client }: { client?: string }) => {
     }
   })();
 
+  const invalidInput = !form.amount_in || !form.amount_out || !give || !get;
+
   return (
     <ListContainer>
       <InputCon>
@@ -382,7 +384,7 @@ const ListWidget = ({ client }: { client?: string }) => {
                 onChange={handleChange}
               />
             ) : (
-              <Text weight="700">Off (Set as Forever) {chainId}</Text>
+              <Text weight="700">Off (Set as Forever)</Text>
             )}
           </DurationInput>
           <Toggle
@@ -401,7 +403,8 @@ const ListWidget = ({ client }: { client?: string }) => {
             checkingAllowance ||
             approvalState === APPROVAL_STATE.PENDING ||
             isUnsupported ||
-            !account
+            !account ||
+            invalidInput
           }
           onClick={async () => {
             if (approvalState === APPROVAL_STATE.NOT_APPROVED) {
@@ -470,14 +473,10 @@ const ListWidget = ({ client }: { client?: string }) => {
         </ContentWrapper>
 
         {modalContent}
-        {/* <PoweredBy style={{ marginTop: "0" }}>
-          Powered By
-          <KyberSwapLogo />
-        </PoweredBy> */}
       </ModalWrapper>
 
       {!!success && (
-        <Message>
+        <Message className={success ? "show" : "hide"}>
           <Flex direction="column" align="center" justify="center">
             <Check />
             <MTitle>{success}</MTitle>
