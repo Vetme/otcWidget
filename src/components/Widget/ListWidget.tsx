@@ -7,6 +7,8 @@ import {
   InputInner,
   Input,
   InputCon,
+  InputDurationCon,
+  SettingWrap,
   Flex,
   Spacer,
   DurationInput,
@@ -23,7 +25,12 @@ import {
 } from "./../styles";
 import TokenBadge from "../TokenBadge";
 import { ModalType, TokenI } from "../../types";
-import { Check, ChevronLeft, Settings as SettingsIcon, Swap } from "../icons";
+import {
+  Check,
+  ChevronLeft,
+  Settings as SettingsIcon,
+  SwapIcon2,
+} from "../icons";
 import useApproval, { APPROVAL_STATE } from "../../hooks/useApproval";
 import { useActiveWeb3 } from "../../hooks/useWeb3Provider";
 import {
@@ -316,21 +323,10 @@ const ListWidget = ({ client }: { client?: string }) => {
 
       <Spacer height={31} />
 
-      <Flex align="center" justify="space-between">
-        <div />
+      <Flex align="center" justify="center">
         <SwapCon onClick={handleSwap}>
-          <Swap
-            color={theme.text}
-            stroke={theme.stroke}
-            fill={theme.secondary}
-          />
+          <SwapIcon2 />
         </SwapCon>
-        <div
-          style={{ cursor: "pointer" }}
-          onClick={() => setShowModal(ModalType.SETTING)}
-        >
-          <SettingsIcon />
-        </div>
       </Flex>
 
       <Spacer height={6} />
@@ -369,9 +365,9 @@ const ListWidget = ({ client }: { client?: string }) => {
           </InputInner>
         </InputBox>
       </InputCon>
-      <Spacer height={20} />
+      <Spacer height={30} />
 
-      <InputCon>
+      <InputDurationCon>
         <label htmlFor="">Time of Contract</label>
         <Flex align="center" style={{ height: "50px" }}>
           <DurationInput>
@@ -391,11 +387,12 @@ const ListWidget = ({ client }: { client?: string }) => {
             name="hasDeadlione"
           />
         </Flex>
-      </InputCon>
+      </InputDurationCon>
       <Spacer height={30} />
 
-      <Flex justify="center">
+      <Flex justify="center" align="center" gap={10}>
         <Button
+          className="block"
           disabled={
             loading ||
             checkingAllowance ||
@@ -431,6 +428,9 @@ const ListWidget = ({ client }: { client?: string }) => {
             "List"
           )}
         </Button>
+        <SettingWrap onClick={() => setShowModal(ModalType.SETTING)}>
+          <SettingsIcon />
+        </SettingWrap>
       </Flex>
 
       {/* {account ? (

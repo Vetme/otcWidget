@@ -20,17 +20,29 @@ export const Button = styled.button.attrs((props) => ({
   font-size: 14px;
   letter-spacing: 0.03em;
   transition: 0.3s;
-  background: ${({ theme }) => theme.interactive};
   position: relative;
   display: flex;
   align-items: center;
   text-transform: uppercase;
+  color: ${({ theme }) => theme.activeText};
+  background: ${({ theme }) => theme.active};
+
+  &.block {
+    width: 100%;
+    flex: 1;
+    border-radius: 8px;
+  }
+
+  &.interactive {
+    background: ${({ theme }) => theme.interactive};
+    border: 1px solid ${({ theme }) => theme.interactive};
+  }
 
   &:hover,
   &:target,
   &:active {
     background: ${({ theme, disabled }) =>
-      disabled ? theme.interactive : theme.interactiveHover};
+      disabled ? theme.active : theme.activeHover};
     border: 1px solid
       ${({ theme, disabled }) => (disabled ? "none" : theme.stroke)};
   }

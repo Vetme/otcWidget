@@ -1,16 +1,17 @@
 export const defaultTheme = {
   primary: "#fff",
-  secondary: "#fcf9ff",
+  secondary: "#EFF1EB",
   dialog: "#fcf9ff",
   borderRadius: "10px",
   inputRadius: "10px",
   buttonRadius: "100px",
   stroke: "#170728",
-  interactive: "#BEFECD",
+  interactive: "#53B088", //"#BEFECD",
   interactiveHover: "#9ce4ad",
   active: "#170728",
+  activeHover: "#17052b",
   activeText: "#fff",
-  accent: "#28E0B9",
+  accent: "#DC83FC;",
   success: "#189470",
   warning: "#FF9901",
   error: "#FF537B",
@@ -39,4 +40,5 @@ export const defaultThemeT = {
   subtext: "#ca9ff8",
   fontFamily: "Space Grotesk",
 };
+
 export type Theme = typeof defaultTheme;

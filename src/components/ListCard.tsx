@@ -13,29 +13,32 @@ const common = css`
 
 const SwapContainer = styled.div`
   max-width: 100%;
-  margin-bottom: 27px;
-  background: ${({ theme }) => theme.secondary};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  border-bottom: ${({ theme }) => `2px solid ${theme.accent}`};
+  margin: 50px 0px;
+  background: ${({ theme }) => theme.primary};
+  border: 1px solid ${({ theme }) => theme.stroke};
+  border-radius: 0px 12px 12px 12px;
 `;
 const Header = styled.div`
   position: relative;
 `;
 const Body = styled.div`
   position: relative;
+  padding: 12px;
 `;
 const Details = styled.div``;
 const ListType = styled.div`
   font-size: 12px;
   position: absolute;
-  bottom: 0px;
+  top: -30px;
+  border-radius: 6px 6px 0px 0px;
   background: ${({ theme }) => theme.accent};
+  border: ${({ theme }) => `1px solid ${theme.accent}`};
   padding: 0px 10px;
   border-bottom: none;
-  height: 20px;
-  line-height: 20px;
+  height: 28px;
+  line-height: 28px;
   color: ${({ theme }) => theme.text};
-  border-bottom-left-radius: ${({ theme }) => theme.borderRadius};
+  left: -1px;
 `;
 
 const TopFLeft = styled.div`
@@ -58,9 +61,10 @@ const DetailWrapper = styled.div`
 
 const DetailWrapperT = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   padding: 39px 18px 18px;
+  gap: 12px;
 `;
 
 const Price = styled.div`
@@ -69,6 +73,29 @@ const Price = styled.div`
   padding: 0px 25px;
   top: -20px;
   position: relative;
+`;
+
+const SwapDesc = styled.div`
+  height: 30px;
+  border-radius: 8px;
+  color: ${({ theme }) => theme.activeText};
+  background: ${({ theme }) => theme.active};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+`;
+
+const ImgWrap = styled.div`
+  height: 36px;
+  width: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const List = ({
@@ -92,63 +119,62 @@ const List = ({
         </TopFLeft>
       </Header>
       <Body>
+        <SwapDesc>
+          {list.token_out_metadata.symbol}/{list.token_in_metadata.symbol}
+        </SwapDesc>
         <DetailWrapperT>
-          <Flex align="center">
-            <TokenBadge
-              token={list.token_out_metadata}
-              handleClick={() => handleChart(list)}
-              hasChart={true}
-            />
-            <Spacer width={15} widthM={10} />
+          <Flex justify="space-between">
+            <Text uppercase>Swap:</Text>
+            <Flex style={{ width: "70%" }} align="center">
+              <ImgWrap>
+                <img
+                  onError={(e: any) => (e.target.src = "/no-token.png")}
+                  src={list.token_out_metadata.logoURI || "/no-token.png"}
+                  alt="Logo"
+                />
+              </ImgWrap>
+              <Spacer width={10} />
+              <Text
+                uppercase
+                size="small"
+                color={theme.subtext}
+                style={{ whiteSpace: "nowrap" }}
+              >
+                {Number(list.amount_in).toFixed(2)} &nbsp;
+                {list.token_in_metadata?.symbol}
+              </Text>
+            </Flex>
           </Flex>
-          <Swap />
-          <Flex align="center">
-            <Spacer width={15} widthM={10} />
-            <TokenBadge
-              token={list.token_in_metadata}
-              handleClick={() => handleChart(list)}
-              hasChart={true}
-            />
+          <Flex justify="space-between">
+            <Text uppercase>For:</Text>
+            <Flex style={{ width: "70%" }} align="center">
+              <ImgWrap>
+                <img
+                  onError={(e: any) => (e.target.src = "/no-token.png")}
+                  src={list.token_out_metadata.logoURI || "/no-token.png"}
+                  alt="Logo"
+                />
+              </ImgWrap>
+              <Spacer width={10} />
+              <Text
+                style={{ whiteSpace: "nowrap" }}
+                uppercase
+                size="small"
+                color={theme.subtext}
+              >
+                {Number(list.amount_out).toFixed(2)} &nbsp;
+                {list.token_out_metadata?.symbol}
+              </Text>
+            </Flex>
           </Flex>
         </DetailWrapperT>
-        <Price>
-          <Text
-            style={{ whiteSpace: "nowrap" }}
-            uppercase
-            size="small"
-            color={theme.subtext}
-          >
-            {Number(list.amount_out).toFixed(2)} &nbsp;
-            {list.token_out_metadata?.symbol}
-          </Text>
 
-          <Text
-            uppercase
-            size="small"
-            color={theme.subtext}
-            style={{ whiteSpace: "nowrap" }}
-          >
-            {Number(list.amount_in).toFixed(2)} &nbsp;
-            {list.token_in_metadata?.symbol}
-          </Text>
-        </Price>
-
-        <DetailWrapper>
-          <Details>
-            {/* {Number(list.amount_in).toFixed(2)} &nbsp;
-              {list.token_in_metadata?.symbol} */}
-            {/* 
-            <Text size="s3" color="#5D5169" uppercase>
-              Expiry Time :{" "}
-              {list.deadline == getForever
-                ? "Forever"
-                : formatSecTime(list.deadline)}
-            </Text> */}
-          </Details>
-
-          <Button onClick={() => callback(TradeType.Swap)}>Trade</Button>
-        </DetailWrapper>
-
+        <Button
+          className="block interactive"
+          onClick={() => callback(TradeType.Swap)}
+        >
+          Trade
+        </Button>
         <ListType>
           {list.is_friction ? "Frictional Trade" : "Fixed Trade"}
         </ListType>

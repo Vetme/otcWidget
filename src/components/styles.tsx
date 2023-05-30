@@ -16,9 +16,9 @@ export const Wrapper = styled.div`
 
 export const ActionSwitch = styled.div`
   padding: 6px 7px;
-  background: ${({ theme }) => theme.primary};
+  background: ${({ theme }) => theme.secondary};
 
-  border: ${({ theme }) => `1px solid ${theme.stroke}`};
+  /* border: ${({ theme }) => `1px solid ${theme.stroke}`}; */
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -62,8 +62,9 @@ export const SwitchItem = styled.div`
 
 export const WBody = styled.div`
   margin: 20px 0px;
-  border: ${({ theme }) => `1px solid ${theme.stroke}`};
+  /* border: ${({ theme }) => `1px solid ${theme.stroke}`}; */
   border-radius: ${({ theme }) => theme.borderRadius};
+  background: ${({ theme }) => theme.secondary};
   padding: 10px;
 `;
 
@@ -71,6 +72,20 @@ export const ListContainer = styled.div``;
 export const SwapContainer = styled.div``;
 
 export const InputCon = styled.div`
+  label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: ${({ theme }) => theme.text};
+
+    text-transform: uppercase;
+  }
+`;
+export const InputDurationCon = styled.div`
+  background: ${({ theme }) => `${theme.primary}`};
+  border: ${({ theme }) => `1px solid ${theme.stroke}`};
+  border-radius: ${({ theme }) => theme.inputRadius};
+  padding: 16px 12px;
   label {
     font-weight: 400;
     font-size: 14px;
@@ -88,6 +103,7 @@ export const InputInner = styled.div`
   position: relative;
   padding-right: 10px;
 
+  background: ${({ theme }) => `${theme.primary}`};
   border: ${({ theme }) => `1px solid ${theme.stroke}`};
   border-radius: ${({ theme }) => theme.inputRadius};
 
@@ -150,7 +166,7 @@ export const Input = styled.input`
 
   &.disabled {
     pointer-events: none;
-    background: ${({ theme }) => theme.secondary};
+    /* background: ${({ theme }) => theme.secondary}; */
   }
 
   @media (max-width: 640px) {
@@ -305,13 +321,33 @@ export const DurationInput = styled.div`
 
 export const SwapCon = styled.div`
   cursor: pointer;
+  height: 40px;
+  width: 40px;
+  border: ${({ theme }) => `1px solid ${theme.stroke}`};
+  border-radius: 100px;
+  background: ${({ theme }) => theme.primary};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SettingWrap = styled.div`
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: ${({ theme }) => `1px solid ${theme.stroke}`};
+  background: ${({ theme }) => theme.primary};
+  cursor: pointer;
 `;
 
 export const ModalWrapper = styled.div`
   position: absolute;
   z-index: 9999;
   bottom: 0px;
-  background: ${({ theme }) => theme.primary};
+  background: ${({ theme }) => theme.secondary};
   width: 100%;
   background: ;
   left: 0px;

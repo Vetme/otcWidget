@@ -10,6 +10,7 @@ import {
   Input,
   Message,
   MTitle,
+  SwapCon,
 } from "./styles";
 import { Check } from "./icons";
 import { BASE_URL, CONTRACT_ADDRESS, SUPPORTED_NETWORKS } from "../constants";
@@ -58,6 +59,10 @@ const ListType = styled.div`
   font-size: 12px;
   display: inline-block;
   margin: 10px 0px;
+  height: 28px;
+  line-height: 28px;
+  /* display: flex; */
+  align-items: center;
 `;
 
 export const InputWrapper = styled.div``;
@@ -195,7 +200,7 @@ const TokenSwap = ({ trade, client, close }: TokenSwapI) => {
           <ListType>
             {trade.is_friction ? "Frictional Trade" : "Fixed Trade"}
           </ListType>
-          <Text className="" uppercase weight="400" size="s3">
+          {/* <Text className="" uppercase weight="400" size="s3">
             Asks{" "}
             <strong>
               {trade?.amount_in} {trade?.token_in_metadata.symbol}
@@ -204,14 +209,14 @@ const TokenSwap = ({ trade, client, close }: TokenSwapI) => {
             <strong>
               {trade?.amount_out} {trade?.token_out_metadata.symbol}
             </strong>
-          </Text>
+          </Text> */}
 
-          <Text className="" uppercase weight="400" size="s3">
+          {/* <Text className="" uppercase weight="400" size="s3">
             Amount Remaining{" "}
             <strong>
               {trade?.amount_out_balance} {trade?.token_out_metadata.symbol}
             </strong>{" "}
-          </Text>
+          </Text> */}
           <Spacer />
           <InputCon>
             <InputBox>
@@ -237,23 +242,26 @@ const TokenSwap = ({ trade, client, close }: TokenSwapI) => {
               </InputInner>
             </InputBox>
           </InputCon>
+          <Spacer height={21} />
 
-          <ADown>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <polyline points="19 12 12 19 5 12"></polyline>
-            </svg>
-          </ADown>
+          <Flex align="center" justify="center">
+            <SwapCon>
+              <svg
+                width="15"
+                height="16"
+                viewBox="0 0 15 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.1562 1.65625C10.1562 1.30078 10.457 1 10.8125 1C11.1953 1 11.4688 1.30078 11.4688 1.65625V12.8398L13.6562 10.8164C13.9297 10.5703 14.3398 10.5703 14.5859 10.8438C14.6953 10.9805 14.75 11.1445 14.75 11.2812C14.75 11.4727 14.6953 11.6367 14.5586 11.7734L11.2773 14.8359C11.0312 15.082 10.6211 15.082 10.375 14.8359L7.09375 11.7734C6.82031 11.5273 6.82031 11.1172 7.06641 10.8438C7.3125 10.5703 7.72266 10.5703 7.99609 10.8164L10.1562 12.8398V1.65625ZM5.34375 14.3438C5.34375 14.7266 5.07031 15 4.6875 15C4.33203 15 4.03125 14.7266 4.03125 14.3438L4.03125 3.1875L1.87109 5.21094C1.59766 5.45703 1.1875 5.45703 0.941406 5.18359C0.832031 5.04688 0.75 4.88281 0.75 4.71875C0.75 4.55469 0.832031 4.39062 0.96875 4.25391L4.25 1.19141C4.49609 0.945312 4.90625 0.945312 5.15234 1.19141L8.43359 4.25391C8.70703 4.5 8.70703 4.91016 8.46094 5.18359C8.21484 5.45703 7.80469 5.45703 7.53125 5.21094L5.34375 3.1875L5.34375 14.3438Z"
+                  fill="#170728"
+                />
+              </svg>
+            </SwapCon>
+          </Flex>
+          {/* <Spacer height={10} /> */}
+
           <InputCon>
             <InputBox>
               <label htmlFor="">You get</label>
@@ -279,9 +287,10 @@ const TokenSwap = ({ trade, client, close }: TokenSwapI) => {
             </InputBox>
           </InputCon>
 
-          <Spacer height={20} />
+          <Spacer height={21} />
           {/* disabled={!isValid()} */}
           <Button
+            className="block interactive"
             disabled={
               loading ||
               checkingAllowance ||

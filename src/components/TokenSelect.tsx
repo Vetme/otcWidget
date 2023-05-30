@@ -34,12 +34,18 @@ const InputCon = styled.div`
 `;
 
 export const ResultCon = styled.div`
-  background: ${({ theme }) => `1px solid ${theme.primary}`};
+  background: ${({ theme }) => `${theme.primary}`};
   border: ${({ theme }) => `1px solid ${theme.stroke}`};
   border-radius: 10px;
   max-height: 319px;
   overflow-y: auto;
   padding: 21px 16px;
+
+  &.swap {
+    background: transparent;
+    border: none;
+    padding: 21px 0px;
+  }
 
   @media (max-width: 640px) {
     padding: 21px 16px;
@@ -58,9 +64,11 @@ const TabContainer = styled.div`
 const Tab = styled.div<{ active: boolean }>`
   padding: 0px 10px;
   cursor: pointer;
-  color: ${({ theme, active }) => (active ? theme.accent : theme.text)};
+  color: ${({ theme, active }) => (active ? theme.active : theme.text)};
+  text-decoration: ${({ theme, active }) => (active ? "underline" : "none")};
+  font-weight: ${({ theme, active }) => (active ? "700" : "400")};
   &:hover {
-    color: ${({ theme }) => theme.accent};
+    text-decoration: underline;
   }
 `;
 
@@ -69,6 +77,8 @@ export const InputWrapper = styled.div`
   display: flex;
   align-items: center;
   /* background: #ffffff; */
+  background: ${({ theme }) => `${theme.primary}`};
+
   border-radius: 10px;
   padding: 0px 9px 0px 20px;
   font-size: 18px;
@@ -76,8 +86,8 @@ export const InputWrapper = styled.div`
   /* color: #170728; */
   color: ${({ theme }) => theme.text};
   border: 1px solid ${({ theme }) => theme.stroke};
-  border-radius: 12px;
-
+  /* border-radius: 12px; */
+  border-radius: 52px;
   svg {
     flex-shrink: 0;
   }

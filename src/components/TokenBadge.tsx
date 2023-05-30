@@ -10,7 +10,7 @@ const Container = styled.div`
   align-items: center;
   padding: 2px 15px;
   color: ${({ theme }) => theme.activeText};
-  background: ${({ theme }) => theme.active};
+  background: ${({ theme }) => theme.interactive};
   cursor: pointer;
   height: 32px;
 `;

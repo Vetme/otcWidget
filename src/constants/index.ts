@@ -131,4 +131,4 @@ export const BLOCK_NAME = (chainId: number | undefined) => {
 
 export const FOREVER = 25256820600;
 
-export const BASE_URL = "https://api.vetmeblock.com/api"; // "http://localhost:4000/api";
+export const BASE_URL = "http://localhost:4000/api"; // "https://api.vetmeblock.com/api"; //

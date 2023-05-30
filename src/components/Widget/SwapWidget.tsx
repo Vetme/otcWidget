@@ -95,7 +95,7 @@ const SwapWidget = ({
 
         <Spacer height={15} />
 
-        <ResultCon>
+        <ResultCon className="swap">
           {loading && <div>Loading..</div>}
           {data.length < 1 ? (
             query.length ? (
