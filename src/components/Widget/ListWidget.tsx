@@ -305,7 +305,7 @@ const ListWidget = ({ client }: { client?: string }) => {
               maxLength={79}
               spellCheck="false"
             />
-            {give && Number(form.amount_out) > 0 && (
+            {give && Number(form.amount_out) > 0 && give.usd && (
               <UsdVal>
                 ~${computeUsdPrice(give.usd, Number(form.amount_out))}
               </UsdVal>
@@ -350,7 +350,7 @@ const ListWidget = ({ client }: { client?: string }) => {
               maxLength={79}
               spellCheck="false"
             />
-            {get && +form.amount_in > 0 && (
+            {get && +form.amount_in > 0 && get.usd && (
               <UsdVal>
                 ~${computeUsdPrice(get.usd, Number(form.amount_in))}
               </UsdVal>
